@@ -1,4 +1,6 @@
 CMUEducation::Application.routes.draw do
+  resources :presentations
+
   resources :search, :only => [:index]
   resources :deliverables
   match '/people/:id/my_deliverables' => 'deliverables#my_deliverables', :as => :my_deliverables
