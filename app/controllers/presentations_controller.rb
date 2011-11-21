@@ -29,6 +29,9 @@ class PresentationsController < ApplicationController
   # GET /presentations/new.xml
   def new
     @presentation = Presentation.new
+    @courses = Course.all
+    @people = Person.all
+    @teams = Team.all
 
     respond_to do |format|
       format.html # new.html.erb

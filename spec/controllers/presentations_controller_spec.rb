@@ -49,6 +49,24 @@ describe PresentationsController do
         get :new
         assigns(:presentation).should be_a_new(Presentation)
       end
+
+      it "assigns all courses as @courses" do
+        Course.stub(:all).and_return([Factory(:fse), Factory(:mfse)])
+        get :new
+        assigns(:courses).should eq(Course.all)
+      end
+
+      it "assigns all teams as @teams" do
+        Team.stub(:all).and_return([@team])
+        get :new
+        assigns(:teams).should eq(Team.all)
+      end
+
+      it "assigns all individuals as @people" do
+        Person.stub(:all).and_return([Factory(:student_sam), Factory(:student_sally)])
+        get :new
+        assigns(:people).should eq(Person.all)
+      end
     end
 
     describe "GET edit" do

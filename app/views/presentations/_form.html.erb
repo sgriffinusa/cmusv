@@ -16,19 +16,19 @@
         <td class="field_label" colspan="2">
           <%= f.label :course_id %>
           <br/>
-          <%= f.text_field :course_id %>
+          <%= f.select :course_id, @courses.collect{|c| [c.name, c.id]} %>
         </td>
       </tr>
       <tr class="cmu_table_even">
         <td class="field_label">
           <%= f.label :team_id %>
           <br/>
-          <%= f.text_field :team_id %>
+          <%= f.select :team_id, @teams.collect{|t| [t.name, t.id]}, { :include_blank => true } %>
         </td>
         <td class="field_label">
           <%= f.label :individual_user_id %>
           <br/>
-          <%= f.text_field :individual_user_id %>
+          <%= f.select :individual_user_id, @people.collect{|p| [p.human_name, p.id]}, { :include_blank => true } %>
         </td>
       </tr>
       <tr class="cmu_table_even">
