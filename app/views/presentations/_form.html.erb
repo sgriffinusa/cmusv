@@ -1,17 +1,53 @@
 <%= form_for(@presentation) do |f| %>
-  <% if @presentation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@presentation.errors.count, "error") %> prohibited this presentation from being saved:</h2>
+    <% if @presentation.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@presentation.errors.count, "error") %> prohibited this presentation from being saved:</h2>
 
-      <ul>
-      <% @presentation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @presentation.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+      <tr class="cmu_table_odd">
+        <td class="field_label" colspan="2">
+          <%= f.label :course_id %>
+          <br/>
+          <%= f.text_field :course_id %>
+        </td>
+      </tr>
+      <tr class="cmu_table_even">
+        <td class="field_label">
+          <%= f.label :team_id %>
+          <br/>
+          <%= f.text_field :team_id %>
+        </td>
+        <td class="field_label">
+          <%= f.label :individual_user_id %>
+          <br/>
+          <%= f.text_field :individual_user_id %>
+        </td>
+      </tr>
+      <tr class="cmu_table_even">
+        <td class="field_label" colspan="2">
+          <%= f.label :title %>
+          <br/>
+          <%= f.text_field :title %>
+        </td>
+      </tr>
+      <tr class="cmu_table_odd">
+        <td class="field_label" colspan="2">
+          <%= f.label :comments %>
+          <br/>
+          <%= f.text_area :comments %>
+        </td>
+      </tr>
+    </table>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
