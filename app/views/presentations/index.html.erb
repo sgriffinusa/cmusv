@@ -2,16 +2,32 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Date</th>
+    <th>Presentation</th>
+    <th>Creator</th>
+    <th>Course</th>
+    <th>Presenter</th>
   </tr>
 
 <% @presentations.each do |presentation| %>
   <tr>
-    <td><%= link_to 'Show', presentation %></td>
-    <td><%= link_to 'Edit', edit_presentation_path(presentation) %></td>
-    <td><%= link_to 'Destroy', presentation, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= presentation.updated_at.strftime("%d/%m/%Y") %></td>
+    <% if (presentation.title.nil?) %>
+      <td><%= link_to 'Title', presentation %></td>
+    <% else %>
+      <td><%= link_to truncate(presentation.title, :length => 30), presentation %></td>
+    <% end %>
+      <td><%=h presentation.creator.human_name %></td>
+    <% if (presentation.course.nil?) %>
+      <td> None </td>
+    <% else %>
+      <td><%=h presentation.course.display_name %></td>
+    <% end %>
+    <% if (presentation.individual.nil?) %>
+      <td><%=h presentation.team.name %></td>
+    <% else %>
+      <td><%=h presentation.individual.human_name %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
