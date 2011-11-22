@@ -4,9 +4,14 @@ describe PresentationsController do
 
   context "as logged in faculty" do
     before do
+      User.delete_all
       @frank = Factory(:faculty_frank)
       @team = Factory(:team)
       login(@frank)
+
+      Course.stub(:all).and_return([Factory(:fse), Factory(:mfse)])
+      Team.stub(:all).and_return([@team])
+      Person.stub(:all).and_return([Factory(:student_sam), Factory(:student_sally)])
 
       def valid_attributes
         {
@@ -51,19 +56,16 @@ describe PresentationsController do
       end
 
       it "assigns all courses as @courses" do
-        Course.stub(:all).and_return([Factory(:fse), Factory(:mfse)])
         get :new
         assigns(:courses).should eq(Course.all)
       end
 
       it "assigns all teams as @teams" do
-        Team.stub(:all).and_return([@team])
         get :new
         assigns(:teams).should eq(Team.all)
       end
 
       it "assigns all individuals as @people" do
-        Person.stub(:all).and_return([Factory(:student_sam), Factory(:student_sally)])
         get :new
         assigns(:people).should eq(Person.all)
       end
@@ -74,6 +76,27 @@ describe PresentationsController do
         presentation = Presentation.create! valid_attributes
         get :edit, :id => presentation.id.to_s
         assigns(:presentation).should eq(presentation)
+      end
+
+      it "assigns all courses as @courses" do
+        presentation = Presentation.create! valid_attributes
+        get :edit, :id => presentation.id.to_s
+
+        assigns(:courses).should eq(Course.all)
+      end
+
+      it "assigns all teams as @teams" do
+        presentation = Presentation.create! valid_attributes
+        get :edit, :id => presentation.id.to_s
+
+        assigns(:teams).should eq(Team.all)
+      end
+
+      it "assigns all individuals as @people" do
+        presentation = Presentation.create! valid_attributes
+        get :edit, :id => presentation.id.to_s
+
+        assigns(:people).should eq(Person.all)
       end
     end
 
@@ -116,6 +139,24 @@ describe PresentationsController do
           Presentation.any_instance.stub(:save).and_return(false)
           post :create, :presentation => {}
           response.should render_template("new")
+        end
+
+        it "assigns all courses as @courses" do
+          Presentation.any_instance.stub(:save).and_return(false)
+          post :create, :presentation => {}
+          assigns(:courses).should eq(Course.all)
+        end
+
+        it "assigns all teams as @teams" do
+          Presentation.any_instance.stub(:save).and_return(false)
+          post :create, :presentation => {}
+          assigns(:teams).should eq(Team.all)
+        end
+
+        it "assigns all individuals as @people" do
+          Presentation.any_instance.stub(:save).and_return(false)
+          post :create, :presentation => {}
+          assigns(:people).should eq(Person.all)
         end
       end
     end
@@ -160,6 +201,30 @@ describe PresentationsController do
           Presentation.any_instance.stub(:save).and_return(false)
           put :update, :id => presentation.id.to_s, :presentation => {}
           response.should render_template("edit")
+        end
+
+        it "assigns all courses as @courses" do
+          presentation = Presentation.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Presentation.any_instance.stub(:save).and_return(false)
+          put :update, :id => presentation.id.to_s, :presentation => {}
+          assigns(:courses).should eq(Course.all)
+        end
+
+        it "assigns all teams as @teams" do
+          presentation = Presentation.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Presentation.any_instance.stub(:save).and_return(false)
+          put :update, :id => presentation.id.to_s, :presentation => {}
+          assigns(:teams).should eq(Team.all)
+        end
+
+        it "assigns all individuals as @people" do
+          presentation = Presentation.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Presentation.any_instance.stub(:save).and_return(false)
+          put :update, :id => presentation.id.to_s, :presentation => {}
+          assigns(:people).should eq(Person.all)
         end
       end
     end
