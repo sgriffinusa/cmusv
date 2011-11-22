@@ -80,6 +80,11 @@ Factory.define :person, :class => Person do |p|
 #  p.remember_created_at Time.now.to_f.to_s
 end
 
+Factory.define :presentation, :class => Presentation do |p|
+  p.association :creator, :factory => :faculty_frank
+  p.association :individual, :factory => :student_sam
+end
+
 
 Factory.define :scotty_dog_saying, :class => ScottyDogSaying do |sds|
   sds.association :user, :factory => :student_sam
