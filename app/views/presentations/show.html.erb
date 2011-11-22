@@ -1,4 +1,29 @@
+<h1>Presentation Details</h1>
+<table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+  <tbody>
+  <tr class="cmu_table_odd">
+    <td>Course:</td>
+    <td><%= @presentation.course.nil? ? "None specified" : @presentation.course.display_name %></td>
+  </tr>
+  <tr class="cmu_table_even">
+    <td>Title:</td>
+    <td><%= @presentation.title %></td>
+  </tr>
+
+  <tr class="cmu_table_odd">
+    <td><%= @presentation.team.nil? ? "Team" :"Name" %>:</td>
+    <td><%= @presentation.team.nil? ? @presentation.team : @presentation.individual %></td>
+  </tr>
+  <tr class="cmu_table_even">
+    <td>Comments:</td>
+    <td><%= @presentation.comments %></td>
+  </tr>
+  </tbody>
+</table>
+
+
 <p id="notice"><%= notice %></p>
+
 
 
 <%= link_to 'Edit', edit_presentation_path(@presentation) %> |
