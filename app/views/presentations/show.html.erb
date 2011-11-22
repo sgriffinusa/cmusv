@@ -11,8 +11,8 @@
   </tr>
 
   <tr class="cmu_table_odd">
-    <td><%= @presentation.team.nil? ? "Team" :"Name" %>:</td>
-    <td><%= @presentation.team.nil? ? @presentation.team : @presentation.individual %></td>
+    <td><%= @presentation.individual.nil? ? "Team" :"Presenter" %> Name:</td>
+    <td><%= @presentation.individual.nil? ? @presentation.team.name : @presentation.individual.human_name %></td>
   </tr>
   <tr class="cmu_table_even">
     <td>Comments:</td>
