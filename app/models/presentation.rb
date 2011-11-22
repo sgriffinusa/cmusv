@@ -11,6 +11,7 @@ class Presentation < ActiveRecord::Base
   belongs_to :creator, :class_name=>'User', :foreign_key => 'creator_user_id', :validate => true
   belongs_to :team, :validate => true
   belongs_to :individual, :class_name=>'User', :foreign_key => 'individual_user_id', :validate => true
+  belongs_to :course
 
   validates_presence_of :creator
 
