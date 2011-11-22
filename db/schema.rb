@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109050657) do
+ActiveRecord::Schema.define(:version => 20111122014427) do
 
   create_table "course_numbers", :force => true do |t|
     t.string   "name"
@@ -156,6 +156,36 @@ ActiveRecord::Schema.define(:version => 20111109050657) do
   add_index "faculty_assignments", ["course_id", "person_id"], :name => "index_courses_people_on_course_id_and_person_id", :unique => true
   add_index "faculty_assignments", ["course_id", "person_id"], :name => "index_faculty_assignments_on_course_id_and_person_id", :unique => true
 
+  create_table "feedbacks", :force => true do |t|
+    t.integer  "presentation_id"
+    t.integer  "eye_contact"
+    t.integer  "voice"
+    t.integer  "motion"
+    t.integer  "hands"
+    t.integer  "verbal_clutter"
+    t.integer  "font_size"
+    t.integer  "slide_clutter"
+    t.integer  "distraction"
+    t.integer  "interest"
+    t.integer  "clarity"
+    t.integer  "evenness"
+    t.integer  "timing"
+    t.text     "eye_contact_comment"
+    t.text     "voice_comment"
+    t.text     "motion_comment"
+    t.text     "hands_comment"
+    t.text     "verbal_clutter_comment"
+    t.text     "font_size_comment"
+    t.text     "slide_clutter_comment"
+    t.text     "distraction_comment"
+    t.text     "interest_comment"
+    t.text     "clarity_comment"
+    t.text     "evenness_comment"
+    t.text     "timing_comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "page_comment_types", :force => true do |t|
     t.string   "name"
     t.string   "background_color"
@@ -248,6 +278,17 @@ ActiveRecord::Schema.define(:version => 20111109050657) do
   add_index "peer_evaluation_reviews", ["author_id"], :name => "index_peer_evaluation_reviews_on_author_id"
   add_index "peer_evaluation_reviews", ["recipient_id"], :name => "index_peer_evaluation_reviews_on_recipient_id"
   add_index "peer_evaluation_reviews", ["team_id"], :name => "index_peer_evaluation_reviews_on_team_id"
+
+  create_table "presentations", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "team_id"
+    t.integer  "individual_user_id"
+    t.integer  "creator_user_id"
+    t.text     "title"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "project_types", :force => true do |t|
     t.string   "name"

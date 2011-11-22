@@ -1,4 +1,8 @@
 class PresentationsController < ApplicationController
+  before_filter :authenticate_user!
+
+  layout 'cmu_sv_no_pad'
+
   # GET /presentations
   # GET /presentations.xml
   def index
@@ -6,7 +10,7 @@ class PresentationsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @presentations }
+      format.xml { render :xml => @presentations }
     end
   end
 
@@ -17,7 +21,7 @@ class PresentationsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @presentation }
+      format.xml { render :xml => @presentation }
     end
   end
 
@@ -25,30 +29,40 @@ class PresentationsController < ApplicationController
   # GET /presentations/new.xml
   def new
     @presentation = Presentation.new
+    @courses = Course.all
+    @people = Person.all
+    @teams = Team.all
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @presentation }
+      format.xml { render :xml => @presentation }
     end
   end
 
   # GET /presentations/1/edit
   def edit
     @presentation = Presentation.find(params[:id])
+    @courses = Course.all
+    @people = Person.all
+    @teams = Team.all
   end
 
   # POST /presentations
   # POST /presentations.xml
   def create
     @presentation = Presentation.new(params[:presentation])
+    @presentation.creator = current_user
 
     respond_to do |format|
       if @presentation.save
         format.html { redirect_to(@presentation, :notice => 'Presentation was successfully created.') }
-        format.xml  { render :xml => @presentation, :status => :created, :location => @presentation }
+        format.xml { render :xml => @presentation, :status => :created, :location => @presentation }
       else
+        @courses = Course.all
+        @people = Person.all
+        @teams = Team.all
         format.html { render :action => "new" }
-        format.xml  { render :xml => @presentation.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @presentation.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,10 +75,13 @@ class PresentationsController < ApplicationController
     respond_to do |format|
       if @presentation.update_attributes(params[:presentation])
         format.html { redirect_to(@presentation, :notice => 'Presentation was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
+        @courses = Course.all
+        @people = Person.all
+        @teams = Team.all
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @presentation.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @presentation.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -77,7 +94,7 @@ class PresentationsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(presentations_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end
