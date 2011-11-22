@@ -53,6 +53,10 @@ describe Presentation do
      Presentation.create(@valid_attributes).course.should eql @course
   end
 
+  it "should have feedbacks" do
+    Presentation.create(@valid_attributes).feedbacks
+  end
+
   it "should only allow faculty or admin to create a presentation" do
     @valid_attributes[:creator_user_id] = @student_sam.id
     presentation = Presentation.create(@valid_attributes)
