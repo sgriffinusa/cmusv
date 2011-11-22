@@ -42,6 +42,9 @@ class PresentationsController < ApplicationController
   # GET /presentations/1/edit
   def edit
     @presentation = Presentation.find(params[:id])
+    @courses = Course.all
+    @people = Person.all
+    @teams = Team.all
   end
 
   # POST /presentations
@@ -55,6 +58,9 @@ class PresentationsController < ApplicationController
         format.html { redirect_to(@presentation, :notice => 'Presentation was successfully created.') }
         format.xml { render :xml => @presentation, :status => :created, :location => @presentation }
       else
+        @courses = Course.all
+        @people = Person.all
+        @teams = Team.all
         format.html { render :action => "new" }
         format.xml { render :xml => @presentation.errors, :status => :unprocessable_entity }
       end
@@ -71,6 +77,9 @@ class PresentationsController < ApplicationController
         format.html { redirect_to(@presentation, :notice => 'Presentation was successfully updated.') }
         format.xml { head :ok }
       else
+        @courses = Course.all
+        @people = Person.all
+        @teams = Team.all
         format.html { render :action => "edit" }
         format.xml { render :xml => @presentation.errors, :status => :unprocessable_entity }
       end

@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe Presentation do
-  before(:each) do
+  before do
+    User.delete_all
+    Course.delete_all
+    Team.delete_all
+
     @faculty_frank = Factory(:faculty_frank)
     @student_sam = Factory(:student_sam)
     @student_sally = Factory(:student_sally)
@@ -20,7 +24,7 @@ describe Presentation do
   end
 
   it "should create new presentation with valid attributes" do
-    lambda {Presentation.create!(@valid_attributes)}.should_not raise_error
+    lambda { Presentation.create!(@valid_attributes) }.should_not raise_error
   end
 
   it "should not allow both team and individual to be specified" do
@@ -39,10 +43,18 @@ describe Presentation do
 
   it "should require a valid creator" do
     @valid_attributes[:creator_user_id] = nil
-    lambda {Presentation.create!(@valid_attributes)}.should raise_error(ActiveRecord::RecordInvalid)
+    lambda { Presentation.create!(@valid_attributes) }.should raise_error(ActiveRecord::RecordInvalid)
 
     @valid_attributes[:creator_user_id] = 123456789000
-    lambda {Presentation.create!(@valid_attributes)}.should raise_error(ActiveRecord::RecordInvalid)
+    lambda { Presentation.create!(@valid_attributes) }.should raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it "should have a course" do
+     Presentation.create(@valid_attributes).course.should eql @course
+  end
+
+  it "should have feedbacks" do
+    Presentation.create(@valid_attributes).feedbacks
   end
 
   it "should only allow faculty or admin to create a presentation" do
@@ -51,11 +63,11 @@ describe Presentation do
     presentation.should have(1).errors_on(:creator)
 
     @valid_attributes[:creator_user_id] = @faculty_frank.id
-        presentation = Presentation.create(@valid_attributes)
+    presentation = Presentation.create(@valid_attributes)
     presentation.should have(0).errors_on(:creator)
 
-        @valid_attributes[:creator_user_id] = @admin_andy.id
-        presentation = Presentation.create(@valid_attributes)
+    @valid_attributes[:creator_user_id] = @admin_andy.id
+    presentation = Presentation.create(@valid_attributes)
     presentation.should have(0).errors_on(:creator)
   end
 
