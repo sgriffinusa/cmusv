@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20111126061827) do
     t.datetime "updated_at"
   end
 
-  add_index "faculty_assignments", ["course_id", "person_id"], :name => "index_courses_people_on_course_id_and_person_id", :unique => true
+  # add_index "faculty_assignments", ["course_id", "person_id"], :name => "index_courses_people_on_course_id_and_person_id", :unique => true
   add_index "faculty_assignments", ["course_id", "person_id"], :name => "index_faculty_assignments_on_course_id_and_person_id", :unique => true
 
   create_table "feedbacks", :force => true do |t|
