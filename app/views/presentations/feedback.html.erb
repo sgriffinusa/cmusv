@@ -50,6 +50,7 @@
 <table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
   <thead>
   <tr>
+    <th>Faculty?</th>
     <th>Content</th>
     <th>Comments</th>
     <th>Organization</th>
@@ -64,6 +65,7 @@
   <tbody>
   <% @presentation.feedbacks.each do |f| %>
       <tr class="<%= cycle("cmu_table_odd", "cmu_table_even") %>">
+        <td><%= f.creator.nil? ? '' : f.creator.human_name %></td>
         <td><%= f.content %></td>
         <td><%= f.content_comment %></td>
         <td><%= f.organization %></td>
