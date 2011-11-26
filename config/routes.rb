@@ -1,4 +1,7 @@
 CMUEducation::Application.routes.draw do
+
+
+  resources :feedbacks
   resources :presentations
 
   resources :search, :only => [:index]
