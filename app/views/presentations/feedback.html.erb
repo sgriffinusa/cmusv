@@ -29,19 +29,19 @@
   <tbody>
   <tr class="cmu_table_odd">
     <td>Content</td>
-    <td><%= @presentation.feedbacks.average(:content) %></td>
+    <td><%= "%0.2f" % @presentation.feedbacks.average(:content)  %></td>
   </tr>
   <tr class="cmu_table_even">
     <td>Organization</td>
-    <td><%= @presentation.feedbacks.average(:organization) %></td>
+    <td><%= "%0.2f" % @presentation.feedbacks.average(:organization) %></td>
   </tr>
   <tr class="cmu_table_odd">
     <td>Visuals</td>
-    <td><%= @presentation.feedbacks.average(:visuals) %></td>
+    <td><%= "%0.2f" % @presentation.feedbacks.average(:visuals) %></td>
   </tr>
   <tr class="cmu_table_even">
     <td>Delivery</td>
-    <td><%= @presentation.feedbacks.average(:delivery) %></td>
+    <td><%= "%0.2f" % @presentation.feedbacks.average(:delivery) %></td>
   </tr>
   </tbody>
 </table>
