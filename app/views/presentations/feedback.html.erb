@@ -1,0 +1,79 @@
+<h1>Presentation Feedback </h1>
+<h2>Presentation Details</h2>
+<table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+  <tbody>
+  <tr class="cmu_table_odd">
+    <td>Course:</td>
+    <td><%= @presentation.course.nil? ? "None specified" : @presentation.course.display_name %></td>
+  </tr>
+  <tr class="cmu_table_even">
+    <td>Title:</td>
+    <td><%= @presentation.title %></td>
+  </tr>
+
+  <tr class="cmu_table_odd">
+    <td><%= @presentation.individual.nil? ? "Team" :"Presenter" %> Name:</td>
+    <td><%= @presentation.individual.nil? ? @presentation.team.name : @presentation.individual.human_name %></td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Feedback Summary</h2>
+<table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+  <thead>
+  <tr>
+    <th>Category</th>
+    <th>Average</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="cmu_table_odd">
+    <td>Content</td>
+    <td><%= @presentation.feedbacks.average(:content) %></td>
+  </tr>
+  <tr class="cmu_table_even">
+    <td>Organization</td>
+    <td><%= @presentation.feedbacks.average(:organization) %></td>
+  </tr>
+  <tr class="cmu_table_odd">
+    <td>Visuals</td>
+    <td><%= @presentation.feedbacks.average(:visuals) %></td>
+  </tr>
+  <tr class="cmu_table_even">
+    <td>Delivery</td>
+    <td><%= @presentation.feedbacks.average(:delivery) %></td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Feedback Details</h2>
+<table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+  <thead>
+  <tr>
+    <th>Content</th>
+    <th>Comments</th>
+    <th>Organization</th>
+    <th>Comments</th>
+    <th>Visuals</th>
+    <th>Comments</th>
+    <th>Delivery</th>
+    <th>Comments</th>
+    <th>General Comments</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @presentation.feedbacks.each do |f| %>
+      <tr class="<%= cycle("cmu_table_odd", "cmu_table_even") %>">
+        <td><%= f.content %></td>
+        <td><%= f.content_comment %></td>
+        <td><%= f.organization %></td>
+        <td><%= f.organization_comment %></td>
+        <td><%= f.visuals %></td>
+        <td><%= f.visuals_comment %></td>
+        <td><%= f.delivery %></td>
+        <td><%= f.delivery_comment %></td>
+        <td><%= f.general_comment %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
