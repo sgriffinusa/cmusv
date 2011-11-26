@@ -17,11 +17,16 @@ describe Feedback do
     })
 
     @valid_attributes = {
-        :presentation => @presentation
+        :presentation => @presentation,
+        :creator => @faculty_frank
     }
   end
 
   it "should belong to a presentation" do
     Feedback.new(@valid_attributes).presentation.should eql @presentation
+  end
+
+  it "should have a creator" do
+    Feedback.new(@valid_attributes).creator.should eql @faculty_frank
   end
 end

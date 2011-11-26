@@ -25,6 +25,10 @@ class PresentationsController < ApplicationController
     end
   end
 
+  def feedback
+    @presentation = Presentation.find(params[:id])
+  end
+
   # GET /presentations/new
   # GET /presentations/new.xml
   def new
