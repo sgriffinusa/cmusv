@@ -1,4 +1,5 @@
 class FeedbacksController < ApplicationController
+
   def show
   end
 
@@ -10,7 +11,9 @@ class FeedbacksController < ApplicationController
 
   def create
     @feedback = Feedback.new(params[:feedback])
-#    @presentation.creator = current_user
+    if (!current_user.nil? && !current_user.is_student)
+      @feedback.creator = current_user
+    end
 
     respond_to do |format|
       if @feedback.save

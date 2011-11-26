@@ -32,7 +32,43 @@ describe FeedbacksController do
       flash[:notice].should eq 'Feedback was successfully recorded.'
     end
 
-    context "new view failure" do
+    context "with logged in faculty" do
+      before do
+        User.delete_all
+        @frank = Factory(:faculty_frank)
+        login(@frank)
+      end
+
+      it "should capture the faculty entering the feedback" do
+        post :create
+
+        assigns(:feedback).creator.id.should == @frank.id
+      end
+    end
+
+    context "with no one logged in" do
+      it "should not capture a creator for the feedback" do
+        post :create
+
+        assigns(:feedback).creator.should be_nil
+      end
+    end
+
+    context "with logged in student" do
+      before do
+        User.delete_all
+        @sam = Factory(:student_sam)
+        login(@sam)
+      end
+
+      it "should not capture a creator for the feedback" do
+        post :create
+
+        assigns(:feedback).creator.should be_nil
+      end
+    end
+
+    context "create fails" do
       before do
         Feedback.any_instance.stub(:save).and_return false
       end
