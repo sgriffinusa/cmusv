@@ -1,2 +1,46 @@
-<h1>Feedbacks#show</h1>
-<p>Find me in app/views/feedbacks/show.html.erb</p>
+<h1>Feedback Details</h1>
+<table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+  <th>Rubric</th>
+  <th>Grade</th>
+  <th>Comment</th>
+
+  <tbody>
+  <tr class="cmu_table_odd">
+    <td>General: </td>
+    <td> &nbsp;</td>
+    <td><%=h @feedback.general_comment.nil? ? "Not specified" :  @feedback.general_comment %></td>
+  </tr>
+
+  <tr class="cmu_table_even">
+    <td>Content: </td>
+    <td><%=h @feedback.content.nil? ? "Not specified" : @feedback.content.to_s %></td>
+    <td><%=h @feedback.content_comment.nil? ? "Not specified" : @feedback.content_comment %></td>
+  </tr>
+
+  <tr class="cmu_table_odd">
+    <td>Organization: </td>
+    <td><%=h @feedback.organization.nil? ? "Not specified" : @feedback.organization.to_s %></td>
+    <td><%=h @feedback.organization_comment.nil? ? "Not specified" : @feedback.organization_comment %></td>
+  </tr>
+
+  <tr class="cmu_table_even">
+  <td>Visuals: </td>
+  <td><%=h @feedback.visuals.nil? ? "Not specified" : @feedback.visuals.to_s %></td>
+  <td><%=h @feedback.visuals_comment.nil? ? "Not specified" : @feedback.visuals_comment %></td>
+  </tr>
+
+  <tr class="cmu_table_odd">
+  <td>Delivery: </td>
+  <td><%=h @feedback.delivery.nil? ? "Not specified" : @feedback.delivery.to_s %></td>
+  <td><%=h @feedback.delivery_comment.nil? ? "Not specified" : @feedback.delivery_comment %></td>
+  </tr>
+
+  </tbody>
+</table>
+
+
+<p id="notice"><%= notice %></p>
+
+
+
+<%= link_to 'Edit', edit_feedback_path(@feedback) %>
