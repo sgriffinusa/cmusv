@@ -1,6 +1,5 @@
 class FeedbacksController < ApplicationController
 
-  before_filter :authenticate_user!
 
   layout 'cmu_sv_no_pad'
 
