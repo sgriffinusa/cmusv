@@ -23,17 +23,34 @@ describe FeedbacksController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
+    it "creates a new Feedback" do
+      expect {
+        post :create
+      }.to change(Feedback, :count).by(1)
+      response.should redirect_to(Feedback.last)
+      flash[:notice].should eq 'Feedback was successfully recorded.'
+    end
+
+    context "new view failure" do
+      before do
+        Feedback.any_instance.stub(:save).and_return false
+      end
+
+      it "should render the new action" do
+        post :create
+
+        response.should render_template("new")
+      end
+    end
+  end
+
+  describe "POST 'update'" do
     it "should be successful" do
     end
   end
 
-  describe "GET 'update'" do
-    it "should be successful" do
-    end
-  end
-
-  describe "GET 'destroy'" do
+  describe "POST 'destroy'" do
     it "should be successful" do
       get 'destroy'
       response.should be_success
