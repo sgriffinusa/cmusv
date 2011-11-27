@@ -11,6 +11,10 @@ describe CourseNavigationsController do
 
     describe "GET show" do
       before do
+        @mock_course = mock("Course")
+        @mock_pages = mock("Pages")
+        Course.stub!(:find).and_return(@mock_course)
+        @mock_course.stub!(:pages).and_return(@mock_pages)
         get :show, :id => course.to_param
       end
 
