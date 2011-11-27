@@ -38,6 +38,10 @@ Factory.define :effort_log, :class => EffortLog do |e|
   e.association :person, :factory => :student_sam
 end
 
+Factory.define :feedback, :class => Feedback do |f|
+
+end
+
 Factory.define :page, :class => Page do |p|
   p.title "My page "
   p.url "my_page"

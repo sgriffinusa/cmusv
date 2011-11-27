@@ -244,5 +244,13 @@ describe PresentationsController do
       end
     end
 
+    describe "GET feedback" do
+      it "assigns the requested presentation as @presentation" do
+        presentation = Presentation.create! valid_attributes
+        get :feedback, :id => presentation.id.to_s
+        assigns(:presentation).should eq(presentation)
+      end
+    end
+
   end
 end

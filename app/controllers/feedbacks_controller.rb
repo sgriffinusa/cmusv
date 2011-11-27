@@ -9,14 +9,18 @@ class FeedbacksController < ApplicationController
 
   def show
     @feedback = Feedback.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml { render :xml => @feedback }
-    end
   end
 
   def new
+    presentation = Presentation.find(params[:id])
+    @feedback = Feedback.new
+    @feedback.presentation = presentation
+    @feedback.creator = current_user
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml { render :xml => @feedback }
+    end
   end
 
   def edit
@@ -42,5 +46,7 @@ class FeedbacksController < ApplicationController
 
   def destroy
   end
+
+
 
 end
