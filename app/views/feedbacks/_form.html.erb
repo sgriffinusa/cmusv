@@ -1,0 +1,69 @@
+<h3><%=h @feedback.presentation.title %></h3>
+<%= form_for(@feedback) do |f| %>
+    <% if @feedback.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+
+          <ul>
+            <% @feedback.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <table border="1" cellspacing="0" cellpadding="0" style="border-width: 1px;" class="cmu_table ">
+      <tr class="cmu_table_odd">
+        <td class="field_label" >
+          <%= f.label :content %>
+        </td>
+        <td class="field_label" >
+          <%= f.select :content, feedback_grade_text, :include_blank => "Select grade" %>
+          <br/>
+          <%= f.text_area :content_comment, :cols => 40, :rows => 3 %>
+      </tr>
+      <tr class="cmu_table_even">
+        <td class="field_label">
+          <%= f.label :organization %>
+        </td>
+        <td class="field_label" >
+          <%= f.select :organization, feedback_grade_text, :include_blank => "Select grade" %>
+          <br/>
+          <%= f.text_area :organization_comment, :cols => 40, :rows => 3 %>
+        </td>
+      </tr>
+      <tr class="cmu_table_even">
+        <td class="field_label" >
+          <%= f.label :visuals %>
+        </td>
+        <td class="field_label" >
+          <%= f.select :visuals, feedback_grade_text, :include_blank => "Select grade" %>
+          <br/>
+          <%= f.text_area :visuals_comment, :cols => 40, :rows => 3 %>
+        </td>
+      </tr>
+      <tr class="cmu_table_odd">
+        <td class="field_label" >
+          <%= f.label :delivery %>
+        </td>
+        <td class="field_label" >
+          <%= f.select :delivery, feedback_grade_text, :include_blank => "Select grade" %>
+          <br/>
+          <%= f.text_area :delivery_comment, :cols => 40, :rows => 3 %>
+        </td>
+      </tr>
+      <tr class="cmu_table_even">
+        <td class="field_label" colspan="1">
+          <%= f.label :general_comment %>
+        </td>
+        <td class="field_label" >
+          <%= f.text_area :general_comment, :cols => 40, :rows => 5  %>
+          <br/>
+        </td>
+      </tr>
+    </table>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

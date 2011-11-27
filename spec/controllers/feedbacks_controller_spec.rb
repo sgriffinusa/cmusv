@@ -4,21 +4,16 @@ describe FeedbacksController do
 
   describe "GET 'show'" do
     it "should be successful" do
-      get 'show'
+      feedback = Factory(:feedback)
+      get 'show', :id => feedback.id
       response.should be_success
     end
   end
 
   describe "GET 'new'" do
     it "should be successful" do
-      get 'new'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'edit'" do
-    it "should be successful" do
-      get 'edit'
+      presentation = Factory(:presentation)
+      get 'new', :id => presentation.id
       response.should be_success
     end
   end
@@ -81,16 +76,6 @@ describe FeedbacksController do
     end
   end
 
-  describe "POST 'update'" do
-    it "should be successful" do
-    end
-  end
 
-  describe "POST 'destroy'" do
-    it "should be successful" do
-      get 'destroy'
-      response.should be_success
-    end
-  end
 
 end
